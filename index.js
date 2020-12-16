@@ -161,7 +161,7 @@ app.get('/dashboard/:authId', async (req, res) => {
           Text({ text: `${profile.weight} кг`, styles: ['xxlarge', 'bold'] })
         ]),
 
-        Button({
+        ctx.auth.id === authId && Button({
           title: 'Изменить текущий вес',
           onClick: showTextDialog({
             title: 'Укажите текущий вес в килограммах',
@@ -174,7 +174,7 @@ app.get('/dashboard/:authId', async (req, res) => {
           Text({ text: `${profile.targetWeight} кг`, styles: ['xxlarge', 'bold'] })
         ]),
 
-        (!hasTargetWeight || ctx.auth.id === authId) && Button({
+        ctx.auth.id === authId && Button({
           title: hasTargetWeight
             ? 'Изменить желаемый вес'
             : 'Указать желаемый вес',
@@ -188,7 +188,7 @@ app.get('/dashboard/:authId', async (req, res) => {
 
         Text({ text: 'Для расчета индекса массы тела необходимо указать рост и вес.' }),
 
-        (!hasHeight || ctx.auth.id === authId) && Button({
+        ctx.auth.id === authId && Button({
           title: hasHeight
             ? `Изменить рост (${profile.height} см)`
             : 'Указать мой рост',
