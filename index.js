@@ -186,8 +186,7 @@ app.get('/dashboard/:authId', async (req, res) => {
           })
         }),
 
-        Text({ text: 'Для расчета индекса массы тела необходимо указать рост и вес.' }),
-
+        ctx.auth.id === authId && Text({ text: 'Для расчета индекса массы тела необходимо указать рост и вес.' }),
         ctx.auth.id === authId && Button({
           title: hasHeight
             ? `Изменить рост (${profile.height} см)`
