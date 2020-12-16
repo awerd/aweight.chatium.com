@@ -37,7 +37,7 @@ app.use(morgan('combined'))
 app.get('/', async (req, res) => {
   const ctx = getContext(req)
 
-  const profiles = (await profileRepo.findAll(ctx)).filter(p => p.height > 0 && p.weight > 0 && p.name)
+  const profiles = (await profileRepo.findAll(ctx)).filter(p => p.weight > 0 && p.name)
   if (profiles.length === 0) {
     return res.json(
       screenResponse({
