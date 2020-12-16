@@ -57,9 +57,9 @@ app.get('/', async (req, res) => {
         profiles.length > 0 && Text({ text: 'Участники', styles: ['bold'], containerStyle: { marginBottom: 0 } }),
         ...profiles.map(p => ListItem({
           title: p.name,
-          description: p.height === 0
+          description: parseFloat(p.height) === 0
             ? 'Не указан рост'
-            : getBMIDescription(calcBMI(p.height, p.weight)),
+            : getBMIDescription(calcBMI(parseFloat(p.height), parseFloat(p.weight))),
           logo: {
             text: p.weight,
             bgColor: '#e0e0e0',
