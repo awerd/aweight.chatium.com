@@ -10,9 +10,6 @@ const profileRepo = new HeapRepo('Profile', {
   name: {
     type: 'string',
   },
-  gender: {
-    type: 'string',
-  },
   height: {
     type: 'int',
   },
@@ -24,35 +21,9 @@ const profileRepo = new HeapRepo('Profile', {
   },
 })
 
-const GENDER_MALE = 'male'
-const GENDER_FEMALE = 'female'
-const GENDER_UNKNOWN = 'unknown'
-
-const profileGenders = {
-  GENDER_MALE,
-  GENDER_FEMALE,
-}
-
 async function getProfileByAuthId(ctx, authId) {
   const profiles = await profileRepo.findAll(ctx)
   return profiles.find(p => p.authId === authId)
-}
-
-async function getOrCreateProfileByAuthId(ctx, authId) {
-  const profile = await getProfileByAuthId(ctx, authId)
-
-  if (!profile) {
-    return await profileRepo.create(ctx, {
-      authId,
-      userId: ctx.userId,
-      name: [ctx.user.firstName, ctx.user.lastName].join(' '),
-      gender: GENDER_UNKNOWN,
-      height: 0,
-      weight: 0,
-      targetWeight: 0,
-    })
-  }
-  return profile
 }
 
 async function updateProfileField(ctx, authId, field, value) {
@@ -70,7 +41,6 @@ async function updateProfileField(ctx, authId, field, value) {
           authId,
           userId: ctx.userId,
           name: [ctx.user.firstName, ctx.user.lastName].join(' '),
-          gender: GENDER_UNKNOWN,
           height: 0,
           weight: 0,
           targetWeight: 0,
@@ -83,8 +53,6 @@ async function updateProfileField(ctx, authId, field, value) {
 
 module.exports = {
   profileRepo,
-  profileGenders,
   getProfileByAuthId,
-  getOrCreateProfileByAuthId,
   updateProfileField,
 }
