@@ -1,24 +1,12 @@
 const { HeapRepo } = require('@chatium/sdk')
 
 const profileRepo = new HeapRepo('Profile', {
-  authId: {
-    type: 'int',
-  },
-  userId: {
-    type: 'string',
-  },
-  name: {
-    type: 'string',
-  },
-  height: {
-    type: 'int',
-  },
-  weight: {
-    type: 'int',
-  },
-  targetWeight: {
-    type: 'int',
-  },
+  authId: { type: 'int' },
+  userId: { type: 'string' },
+  name: { type: 'string' },
+  height: { type: 'int' },
+  weight: { type: 'int' },
+  targetWeight: { type: 'int' },
 })
 
 async function getProfileByAuthId(ctx, authId) {

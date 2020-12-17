@@ -1,5 +1,7 @@
 function calcBMI(height, weight) {
-  return Math.round(weight / Math.pow(height / 100, 2) * 100) / 100
+  return height === 0
+    ? null
+    : Math.round(weight / Math.pow(height / 100, 2) * 100) / 100
 }
 
 function getBMIDescription(BMI) {
